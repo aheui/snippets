@@ -2,8 +2,6 @@
 
 찾아보면 [당시 수업 조교가 썼던 글](http://drspark.dreamwiz.com/cgi-bin/zero/view.php?id=talk&no=2073)을 발견할 수 있다.
 
--- Puzzlet Chung
-
 ## 기존 설명
 
 학교에서 이산수학 프로젝트로 제출했던 코드들입니다. 입력 값에 대해서는 [링크](http://ko.wikipedia.org/wiki/RSA)타고 가서 참고하세요. -- Dish
