@@ -1,18 +1,24 @@
-function divide( a )
-{
-	var b = Math.floor( a/2 );
-	if( a%2 == 1 ) return [ b, b+1 ];
-	else return [ b, b ];
-}
+var table = [
+	"바", "받반타", "반", "받", "밤",
+	"발", "밦", "밝", "밣", "밢","반발따"
+];
 
 function factorization( a )
 {
 	var primes = [];
 	var factor = 2;
+	var sqrt = Math.floor( Math.sqrt( a ) );
 	if( a<2 ) return [ a ];
 	while( a>1 )
 	{
-		while( a%factor ) ++factor;
+		if( sqrt<factor ){
+			primes.push(a);
+			break;
+		}
+		if( a%factor ){
+			++factor;
+			continue;
+		}
 		primes.push( factor );
 		a = Math.floor( a/factor );
 	}
@@ -21,8 +27,6 @@ function factorization( a )
 
 function compressFactors( a )
 {
-	var isFirst2 = true;
-	var isFirst3 = true;
 	var cnt2 = 0;
 	var cnt3 = 0;
 	var result = [];
@@ -30,19 +34,18 @@ function compressFactors( a )
 	{
 		if( a[ i ]==2 )
 		{
-			++cnt2;
-			if( isFirst2 ) isFirst2=false;
-			else if( !( cnt2%3 ) ) result.push( 8 );
+			++cnt2;			
+			if( !( cnt2%3 ) ) result.push( 8 );
 		} else if( a[ i ]==3 )
 		{
 			++cnt3;
-			if( isFirst3 ) isFirst3=false;
-			else if( !( cnt3%2 ) ) result.push( 9 );
+			if( !( cnt3%2 ) ) result.push( 9 );
 		} else result.push( a[ i ] );
 	}
 	if( cnt2%3==2 ) result.push( 4 );
+	if( cnt2%3==1 && cnt3%2==1) result.push( 6 );
+	else if( cnt3%2==1 ) result.push( 3 );
 	else if( cnt2%3==1 ) result.push( 2 );
-	if( cnt3%2==1 ) result.push( 3 );
 	return result;
 }
 
@@ -54,33 +57,75 @@ function isPrime( a )
 	return sqrt+1 == i;
 }
 
+function n2Aheui3( a )
+{
+	var i;
+	for(i=9; a/i<10; --i){
+		if(!(a%i)){
+			return table[i]+table[a/i]+"따";
+		}
+	}
+	return "";
+}
+
 function number2Aheui( a )
 {
 	var i;
-	var cnt =- 1;
 	var result = "";
 	var divided;
 	var compressed;
-	var table = [
-		"바", "받반타", "반", "받", "밤",
-		"발", "밦", "밝", "밣", "밢"
-	];
-	if( a<10 ) return table[ a ];
-	if( isPrime( a ) )
-	{
-		divided = divide( a );
-		for( i=0; i<divided.length; ++i )
-			result += number2Aheui( divided[ i ] );
-		result += "다";
-		return result;
-	} else {
+	var tmp;
+	
+	if( a<82 ){
+		if( a<11 ) return table[ a ];
+		if( a<20 ) return table[9]+table[a-9]+"다";		
+		if(tmp=n2Aheui3(a)){
+			return tmp;
+		}else{
+			tmp=a%9;
+			if(tmp==1) return n2Aheui3(a+8)+table[8]+"타";
+			else return n2Aheui3(a-tmp)+table[tmp]+"다";
+		}
+	}
+	
+	if( isPrime( a ) ) return number2Aheui(Math.floor( a/9 ))+table[9]+"따"+table[a%9]+"다";
+	else {
 		compressed = compressFactors( factorization( a ) );
-		for( i=0; i<compressed.length; ++i )
-			result += number2Aheui( compressed[ i ] ), ++cnt;
-		for( i=0; i<cnt; ++i )
+		tmp=compressed.length;
+		for( i=0; i<tmp; ++i )
+			result += number2Aheui( compressed[ i ] );
+		--tmp;	
+		for( i=0; i<tmp; ++i )
 			result += "따";
 		return result;
 	}
+}
+
+function number2AheuiQ( a )
+{
+	var i;
+	var tmp;
+	var result = "";
+	
+	if( a<11 ) return table[ a ];
+	var _9=[];
+	while(a){
+		_9.push(Math.floor(a%9));
+		a=Math.floor(a/9);
+	}
+	i=_9.length;
+	while(i--){
+		if(tmp =_9[i]){
+			if(i==_9.length-1){
+				result+=table[tmp];
+			}else{
+				result+=table[9]+"따"+table[tmp]+"다";
+			}
+		}else{
+			result+=table[9]+"따";
+		}
+	}
+	return result;
 }
 
 function trace2Aheui( a )
@@ -88,5 +133,13 @@ function trace2Aheui( a )
 	var result = "";
 	for( var i=0; i<a.length; ++i )
 		result += number2Aheui( a.charCodeAt( i ) )+"맣";
+	return result;
+}
+
+function trace2AheuiQ( a )
+{
+	var result = "";
+	for( var i=0; i<a.length; ++i )
+		result += number2AheuiQ( a.charCodeAt( i ) )+"맣";
 	return result;
 }
