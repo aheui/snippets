@@ -2,14 +2,17 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<title>Aheuilize</title>
-		<script type="text/javascript" src="aheuilize.js"></script>
+		<title>Aheuilize2</title>
+		<script type="text/javascript" src="aheuilize2.js"></script>
 	<body>
-		<h1>Aheuilize</h1>
+		<h1>Aheuilize2</h1>
 		<form>
 			<textarea name="input" rows="1" cols="80"></textarea><br/>
 			<input type="button" value="숫자->아희" onclick="javascript:document.forms[ 0 ].output.value = number2Aheui( parseInt( document.forms[ 0 ].input.value ) )+'망히'"/>
 			<input type="button" value="문자열->아희" onclick="javascript:document.forms[ 0 ].output.value = trace2Aheui( document.forms[ 0 ].input.value )+'히'"/>
+			<br/>
+			<input type="button" value="숫자->아희(빠르게)" onclick="javascript:document.forms[ 0 ].output.value = number2AheuiQ( parseInt( document.forms[ 0 ].input.value ) )+'망히'"/>
+			<input type="button" value="문자열->아희(빠르게)" onclick="javascript:document.forms[ 0 ].output.value = trace2AheuiQ( document.forms[ 0 ].input.value )+'히'"/>
 			<br/>
 			<textarea name="output" rows="10" cols="80" style="scrollbar=both;"></textarea><br/>
 		</form>
@@ -19,5 +22,11 @@
 		<br/><br/>
 		<b>trace2Aheui( "코드 최적화가 필요ㅠㅠ" ) + "히"</b><br/>//
 		<script type="text/javascript"> document.write( trace2Aheui( "코드 최적화가 필요ㅠㅠ" ) + "히<br/><br/>" ); </script>
+		<br/><br/>
+		<b>number2AheuiQ( 12345 ) + "망히"</b><br/>//
+		<script type="text/javascript"> document.write( number2AheuiQ( 12345 ) + "망히" ); </script>
+		<br/><br/>
+		<b>trace2AheuiQ( "코드 최적화가 필요ㅠㅠ" ) + "히"</b><br/>//
+		<script type="text/javascript"> document.write( trace2AheuiQ( "코드 최적화가 필요ㅠㅠ" ) + "히<br/><br/>" ); </script>
 	</body>
 </html>
