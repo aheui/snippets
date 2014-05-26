@@ -6,31 +6,31 @@ if [ ! "$AHEUI" ]; then
     exit 1
 fi
 
-AHEUI_PATH=`which "${AHEUI}"`
-if [ "$AHEUI_PATH" ]; then
-    AHEUI="$AHEUI_PATH"
-elif [ ${AHEUI:0:1} != '/' ]; then
-    echo "sjfiod"
-    AHEUI=`pwd`/"$AHEUI"
+if [ ${1} ]; then
+    ds=${*}
+else
+    ds=*/
 fi
 
-for d in */; do
-    pushd $d
-    for f in *.aheui; do
+for d in $ds; do
+    echo 'testset:' $d
+    for f in $d/*.aheui; do
         fbase=`basename "$f" .aheui`
-        if [ -e "$fbase".out ]; then
-            if [ -e "$fbase".in ]; then
-                out=`$AHEUI $f < $fbase.in`
+        if [ -e "$d/$fbase".out ]; then
+            echo -n "  test $fbase"...
+            if [ -e "$d/$fbase".in ]; then
+                out=`$AHEUI $f < $d/$fbase.in`
             else
                 out=`$AHEUI $f`
             fi
-            outdata=`cat "$fbase".out`
+            outdata=`cat "$d/$fbase".out`
             if [ "$out" == "$outdata" ]; then
                 echo "success!"
             else
-                echo "fali!"
+                echo "fail!"
             fi
+        else
+            echo '  test output not found'
         fi
     done
-    popd
 done
