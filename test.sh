@@ -12,6 +12,8 @@ else
     ds=*/
 fi
 
+success=0
+fail=0
 for d in $ds; do
     echo 'testset:' $d
     for f in $d/*.aheui; do
@@ -25,8 +27,10 @@ for d in $ds; do
             fi
             outdata=`cat "$d/$fbase".out`
             if [ "$out" == "$outdata" ]; then
+                success=$(($success + 1))
                 echo "success!"
             else
+                success=$(($fail + 1))
                 echo "fail!"
             fi
         else
@@ -34,3 +38,5 @@ for d in $ds; do
         fi
     done
 done
+
+echo test status: $success/$(($success + $fail))
