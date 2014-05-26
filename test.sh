@@ -30,7 +30,7 @@ for d in $ds; do
                 success=$(($success + 1))
                 echo "success!"
             else
-                success=$(($fail + 1))
+                fail=$(($fail + 1))
                 echo "fail!"
             fi
         else
