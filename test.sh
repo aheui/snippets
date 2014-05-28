@@ -40,3 +40,4 @@ for d in $ds; do
 done
 
 echo test status: $success/$(($success + $fail))
+exit $fail
