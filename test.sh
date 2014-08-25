@@ -25,8 +25,14 @@ for d in $ds; do
             else
                 out=`$AHEUI $f`
             fi
+            exitcode=$?
+            if [ -e "$d/$fbase".exitcode ]; then
+              exitcodedata=`cat "$d/$fbase".exitcode`
+            else
+              exitcodedata=0
+            fi
             outdata=`cat "$d/$fbase".out`
-            if [ "$out" == "$outdata" ]; then
+            if [ "$out" == "$outdata" -a "$exitcode" == "$exitcodedata" ]; then
                 success=$(($success + 1))
                 echo "success!"
             else
