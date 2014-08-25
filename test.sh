@@ -18,8 +18,8 @@ for d in $ds; do
     echo 'testset:' $d
     for f in $d/*.aheui; do
         fbase=`basename "$f" .aheui`
+        echo -n "  test $fbase"...
         if [ -e "$d/$fbase".out ]; then
-            echo -n "  test $fbase"...
             if [ -e "$d/$fbase".in ]; then
                 out=`$AHEUI $f < $d/$fbase.in`
             else
@@ -34,7 +34,7 @@ for d in $ds; do
                 echo "fail!"
             fi
         else
-            echo '  test output not found'
+            echo 'output not found'
         fi
     done
 done
