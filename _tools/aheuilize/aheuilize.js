@@ -34,7 +34,7 @@ function compressFactors( a )
 	{
 		if( a[ i ]==2 )
 		{
-			++cnt2;			
+			++cnt2;
 			if( !( cnt2%3 ) ) result.push( 8 );
 		} else if( a[ i ]==3 )
 		{
@@ -75,10 +75,10 @@ function number2Aheui( a )
 	var divided;
 	var compressed;
 	var tmp;
-	
+
 	if( a<82 ){
 		if( a<11 ) return table[ a ];
-		if( a<20 ) return table[9]+table[a-9]+"다";		
+		if( a<20 ) return table[9]+table[a-9]+"다";
 		if(tmp=n2Aheui3(a)){
 			return tmp;
 		}else{
@@ -87,14 +87,14 @@ function number2Aheui( a )
 			else return n2Aheui3(a-tmp)+table[tmp]+"다";
 		}
 	}
-	
+
 	if( isPrime( a ) ) return number2Aheui(Math.floor( a/9 ))+table[9]+"따"+table[a%9]+"다";
 	else {
 		compressed = compressFactors( factorization( a ) );
 		tmp=compressed.length;
 		for( i=0; i<tmp; ++i )
 			result += number2Aheui( compressed[ i ] );
-		--tmp;	
+		--tmp;
 		for( i=0; i<tmp; ++i )
 			result += "따";
 		return result;
@@ -106,7 +106,7 @@ function number2AheuiQ( a )
 	var i;
 	var tmp;
 	var result = "";
-	
+
 	if( a<11 ) return table[ a ];
 	var _9=[];
 	while(a){
