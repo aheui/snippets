@@ -32,9 +32,16 @@ for d in $ds; do
               exitcodedata=0
             fi
             outdata=`cat "$d/$fbase".out`
-            if [ "$out" == "$outdata" -a "$exitcode" == "$exitcodedata" ]; then
-                success=$(($success + 1))
-                echo -e "\x1B[92msuccess!\x1B[0m"
+            if [ "$out" == "$outdata" ]; then
+                if [ "$exitcode" == "$exitcodedata" ]; then
+                    success=$(($success + 1))
+                    echo -e "\x1B[92msuccess!\x1B[0m"
+                else
+                    fail=$(($fail + 1))
+                    echo -e "\x1B[91mfail!\x1B[0m"
+                    echo -e "    \x1B[92mexpected exitcode\x1B[0m $exitcodedata"
+                    echo -e "    \x1B[91mactual exitcode\x1B[0m   $exitcode"
+                fi
             else
                 fail=$(($fail + 1))
                 echo -e "\x1B[91mfail!\x1B[0m"
