@@ -28,13 +28,13 @@ for d in $ds; do
             outdata=`cat "$d/$fbase".out`
             if [ "$out" == "$outdata" ]; then
                 success=$(($success + 1))
-                echo "success!"
+                echo -e "\x1B[92msuccess!\x1B[0m"
             else
                 fail=$(($fail + 1))
-                echo "fail!"
+                echo -e "\x1B[91mfail!\x1B[0m"
             fi
         else
-            echo 'output not found'
+            echo -e '\x1B[93moutput not found\x1B[0m'
         fi
     done
 done
