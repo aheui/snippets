@@ -27,20 +27,26 @@ for d in $ds; do
             fi
             exitcode=$?
             if [ -e "$d/$fbase".exitcode ]; then
-              exitcodedata=`cat "$d/$fbase".exitcode`
+                exitcodetest=1
+                exitcodedata=`cat "$d/$fbase".exitcode`
             else
-              exitcodedata=0
+                exitcodetest=0
             fi
             outdata=`cat "$d/$fbase".out`
             if [ "$out" == "$outdata" ]; then
-                if [ "$exitcode" == "$exitcodedata" ]; then
-                    success=$(($success + 1))
-                    echo -e "\x1B[92msuccess!\x1B[0m"
+                if [ "$exitcodetest" == 1 ]; then
+                    if [ "$exitcode" == "$exitcodedata" ]; then
+                        success=$(($success + 1))
+                        echo -e "\x1B[92msuccess!\x1B[0m"
+                    else
+                        fail=$(($fail + 1))
+                        echo -e "\x1B[91mfail!\x1B[0m"
+                        echo -e "    \x1B[92mexpected exitcode\x1B[0m $exitcodedata"
+                        echo -e "    \x1B[91mactual exitcode\x1B[0m   $exitcode"
+                    fi
                 else
-                    fail=$(($fail + 1))
-                    echo -e "\x1B[91mfail!\x1B[0m"
-                    echo -e "    \x1B[92mexpected exitcode\x1B[0m $exitcodedata"
-                    echo -e "    \x1B[91mactual exitcode\x1B[0m   $exitcode"
+                    succses=$(($success + 1))
+                    echo -e "\x1B[92msuccess!\x1B[0m"
                 fi
             else
                 fail=$(($fail + 1))
