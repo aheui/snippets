@@ -45,7 +45,7 @@ for d in $ds; do
                         echo -e "    \x1B[91mactual exitcode\x1B[0m   $exitcode"
                     fi
                 else
-                    succses=$(($success + 1))
+                    success=$(($success + 1))
                     echo -e "\x1B[92msuccess!\x1B[0m"
                 fi
             else
@@ -60,5 +60,5 @@ for d in $ds; do
     done
 done
 
-echo test status: $success/$(($success + $fail))
+echo -e "test status: $success/\x1B[92m$(($success + $fail))\x1B[0m"
 exit $fail
