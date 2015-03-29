@@ -21,11 +21,12 @@ for d in $ds; do
         echo -n "  test $fbase"...
         if [ -e "$d/$fbase".out ]; then
             if [ -e "$d/$fbase".in ]; then
-                out=`$AHEUI $f < $d/$fbase.in`
+                "$AHEUI" "$f" < "$d/$fbase.in" > .test.tmp
             else
-                out=`$AHEUI $f`
+                "$AHEUI" "$f" > .test.tmp
             fi
             exitcode=$?
+            out=`cat .test.tmp`
             if [ -e "$d/$fbase".exitcode ]; then
                 exitcodetest=1
                 exitcodedata=`cat "$d/$fbase".exitcode`
@@ -53,7 +54,10 @@ for d in $ds; do
                 echo -e "\x1B[91mfail!\x1B[0m"
                 echo -e "    \x1B[92mexpected\x1B[0m $outdata"
                 echo -e "    \x1B[91mactual\x1B[0m   $out"
+                echo -e "diff from actual to expected"
+                diff -u .test.tmp "$d/$fbase.out"
             fi
+            rm .test.tmp
         else
             echo -e '\x1B[93moutput not found\x1B[0m'
         fi
