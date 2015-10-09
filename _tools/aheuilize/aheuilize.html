@@ -4,12 +4,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>Aheuilize</title>
 		<script type="text/javascript" src="aheuilize.js"></script>
+		<script type="text/javascript" src="actac.js"></script>
 	<body>
 		<h1>Aheuilize</h1>
 		<form>
 			<textarea name="input" rows="1" cols="80"></textarea><br/>
 			<input type="button" value="숫자->아희" onclick="javascript:document.forms[ 0 ].output.value = number2Aheui( parseInt( document.forms[ 0 ].input.value ) )+'망히'"/>
 			<input type="button" value="문자열->아희" onclick="javascript:document.forms[ 0 ].output.value = trace2Aheui( document.forms[ 0 ].input.value )+'히'"/>
+			<input type="button" value="아스키->아희" onclick="javascript:document.forms[ 0 ].output.value = ascii2Aheui( document.forms[ 0 ].input.value )"/>
 			<br/>
 			<input type="button" value="숫자->아희(빠르게)" onclick="javascript:document.forms[ 0 ].output.value = number2AheuiQ( parseInt( document.forms[ 0 ].input.value ) )+'망히'"/>
 			<input type="button" value="문자열->아희(빠르게)" onclick="javascript:document.forms[ 0 ].output.value = trace2AheuiQ( document.forms[ 0 ].input.value )+'히'"/>
@@ -28,5 +30,8 @@
 		<br/><br/>
 		<b>trace2AheuiQ( "코드 최적화가 필요ㅠㅠ" ) + "히"</b><br/>//
 		<script type="text/javascript"> document.write( trace2AheuiQ( "코드 최적화가 필요ㅠㅠ" ) + "히<br/><br/>" ); </script>
+		<br/><br/>
+		<b>ascii2Aheui( "Hello, World!" )</b><br/>//
+		<script type="text/javascript"> document.write( ascii2Aheui( "Hello, World!" ) + "<br/><br/>" ); </script>
 	</body>
 </html>
