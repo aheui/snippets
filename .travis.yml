@@ -1,0 +1,12 @@
+language: python
+cache:
+  directories:
+  - $HOME/.cache/pip
+python:
+- '3.5'
+install:
+- pip install --upgrade pip aheui
+- hash -r
+script:
+- AHEUI=aheui-py bash test.sh --disable logo
+sudo: false
