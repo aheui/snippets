@@ -7,14 +7,40 @@ if [ ! "$AHEUI" ]; then
 fi
 
 if [ ${1} ]; then
-    ds=${*}
+    if [ $1 == --disable ]; then
+        ds=*/
+        mode='optout'
+    else
+        ds=${*}
+        mode='optin'
+    fi
 else
     ds=*/
+    mode='optout'
 fi
+
+echo "mode: $mode / targets: $ds"
 
 success=0
 fail=0
 for d in $ds; do
+    check=''
+    if [ $mode == optout ]; then
+        for dx in ${*}; do
+            if [ $d == $dx ]; then
+                check=1
+                break
+            fi
+            if [ $d == $dx'/' ]; then
+                check=1
+                break
+            fi
+        done
+    fi
+    if [ $check ]; then
+        continue
+    fi
+
     echo 'testset:' $d
     for f in $d/*.aheui; do
         fbase=`basename "$f" .aheui`
