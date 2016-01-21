@@ -1,0 +1,6 @@
+# Aheui code files have line endings of lf
+*.aheui text eol=lf
+
+# Input and output files should not be changed
+*.in binary
+*.out binary
