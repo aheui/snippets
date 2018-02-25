@@ -47,9 +47,9 @@ for d in $ds; do
         echo -n "  test $fbase"...
         if [ -e "$d/$fbase".out ]; then
             if [ -e "$d/$fbase".in ]; then
-                "$AHEUI" "$f" < "$d/$fbase.in" > .test.tmp
+                "$AHEUI" $AHEUIFLAGS "$f" < "$d/$fbase.in" > .test.tmp
             else
-                "$AHEUI" "$f" > .test.tmp
+                "$AHEUI" $AHEUIFLAGS "$f" > .test.tmp
             fi
             exitcode=$?
             out=`cat .test.tmp`
