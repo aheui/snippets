@@ -8,5 +8,5 @@ install:
 - pip install --upgrade pip aheui
 - hash -r
 script:
-- AHEUI=aheui-py bash test.sh --disable logo
+- AHEUI='aheui-py' AHEUIFLAGS='-O1' bash test.sh --disable logo
 sudo: false
