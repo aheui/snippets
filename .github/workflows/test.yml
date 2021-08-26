@@ -1,0 +1,23 @@
+name: test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2.2.2
+        with:
+          python-version: 3.5
+      - run: pip install --upgrade pip aheui
+      - run: bash test.sh --disable logo
+        env:
+          AHEUI: aheui-py
+          AHEUIFLAGS: -O1
