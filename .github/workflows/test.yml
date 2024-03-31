@@ -15,7 +15,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2.2.2
         with:
-          python-version: 3.5
+          python-version: 3.11
       - run: pip install --upgrade pip aheui
       - run: bash test.sh --disable logo
         env:
