@@ -1,10 +1,12 @@
 import math
 
+
 def divide(a):
     b = int(a / 2)
     if a % 2 == 1:
         return [b, b + 1]
     return [b, b]
+
 
 def factorization(a):
     primes = []
@@ -17,6 +19,7 @@ def factorization(a):
         primes.append(factor)
         a = int(a / factor)
     return primes
+
 
 def compress_factors(a):
     is_first_2 = True
@@ -47,6 +50,7 @@ def compress_factors(a):
         result.append(3)
     return result
 
+
 def is_prime(a):
     sqrt = int(math.sqrt(a))
     if a < 2:
@@ -55,6 +59,7 @@ def is_prime(a):
     while a % i and i <= sqrt:
         i += 1
     return sqrt + 1 == i
+
 
 def number2Aheui(a):
     cnt = -1
@@ -78,8 +83,9 @@ def number2Aheui(a):
             result += "따"
         return result
 
+
 def trace2Aheui(a):
     result = ""
     for i in range(len(a)):
-        result += number2Aheui(ord(a[i]))+"맣"
+        result += number2Aheui(ord(a[i])) + "맣"
     return result
